@@ -1,11 +1,13 @@
 package com.br.reclameaqui.base.model;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-public class Company {
+public class Consumer {
     @NotNull(message = "O nome deve ser inserido")
     private String name;
-    private String category;
+    @Email(message = "Email inválido")
+    private String email;
 
     public String getName() {
         return name;
@@ -15,12 +17,11 @@ public class Company {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
 }

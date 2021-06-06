@@ -3,6 +3,7 @@ package com.br.reclameaqui.base.model;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.Valid;
@@ -13,16 +14,28 @@ public class Claim {
 
     @Id
     private String id;
-    @NotNull(message = "O t�tulo deve ser inserido")
+    @NotNull(message = "O título deve ser inserido")
     private String title;
-    @NotNull(message = "O nome deve ser inserido")
-    private String person;
     private Date createdAt;
-    @NotNull(message = "A descriç�o deve ser inserida")
+    @NotNull(message = "A descrição deve ser inserida")
     private String description;
-    @NotNull(message = "O Endereço � obrigat�rio")
+    @NotNull(message = "O Endereço é obrigatório")
     @Valid
     private Address address;
+    @NotNull(message = "O consumidor é obrigatório")
+    @Valid
+    private Consumer consumer;
+    @NotNull(message = "A empresa é obrigatório")
+    @Valid
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public String getId() {
         return id;
@@ -40,12 +53,12 @@ public class Claim {
         this.createdAt = createdAt;
     }
 
-    public String getPerson() {
-        return person;
+    public Consumer getConsumer() {
+        return consumer;
     }
 
-    public void setPerson(String person) {
-        this.person = person;
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
 
     public Address getAddress() {
