@@ -40,7 +40,7 @@ public class Address {
     }
 
     public void setUf(String uf) {
-        this.uf = uf;
+        this.uf = uf.toUpperCase();
     }
 
 }

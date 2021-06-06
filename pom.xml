@@ -5,6 +5,7 @@
 	<modules>
 		<module>base</module>
 		<module>claim-web-register</module>
+		<module>claim-web-consult</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
