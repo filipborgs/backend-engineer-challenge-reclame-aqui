@@ -2,18 +2,26 @@ package com.br.reclameaqui.base.model;
 
 import java.util.Date;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 @Document(collection = "claim")
 public class Claim {
 
     @Id
     private String id;
+    @NotNull(message = "O t�tulo deve ser inserido")
     private String title;
+    @NotNull(message = "O nome deve ser inserido")
     private String person;
     private Date createdAt;
+    @NotNull(message = "A descriç�o deve ser inserida")
     private String description;
+    @NotNull(message = "O Endereço � obrigat�rio")
+    @Valid
     private Address address;
 
     public String getId() {

@@ -1,10 +1,14 @@
 package com.br.reclameaqui.base.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Address {
 
     private String street;
+    @NotNull(message = "Uma cidade deve ser informada")
     private String city;
     private String cep;
+    @NotNull(message = "Um estado deve ser informado")
     private String uf;
 
     public String getStreet() {
