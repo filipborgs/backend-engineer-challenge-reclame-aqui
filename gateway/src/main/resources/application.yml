@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: claim-web-register
+          uri: lb://CLAIM-WEB-REGISTER
+          predicates:
+            - Path=/register/claims/**
+        - id: claim-web-consult
+          uri: lb://CLAIM-WEB-CONSULT
+          predicates:
+            - Path=/consult/claims/**

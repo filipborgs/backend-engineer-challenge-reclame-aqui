@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("claims")
+@RequestMapping("consult/claims")
 public class ClaimConsultController {
 
     @Autowired
     private ClaimConsultService service;
+
+    @GetMapping
+    public String teste(){
+        return "Consult claim service";
+    }
 
     @GetMapping("all")
     public List<Claim> all() {

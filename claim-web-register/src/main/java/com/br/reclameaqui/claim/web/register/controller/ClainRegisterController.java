@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("claims")
+@RequestMapping("register/claims")
 public class ClainRegisterController {
 
     @Autowired
     private ClaimRegisterService service;
+
+    @GetMapping
+    public String teste(){
+        return "Register Claim service";
+    }
 
     @PostMapping
     public Claim save(@RequestBody Claim claim){
