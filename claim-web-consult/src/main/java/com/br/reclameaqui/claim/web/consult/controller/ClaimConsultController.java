@@ -1,15 +1,11 @@
 package com.br.reclameaqui.claim.web.consult.controller;
 
 import com.br.reclameaqui.base.exception.NotFoundException;
-import com.br.reclameaqui.base.exception.TreatedExcetpion;
 import com.br.reclameaqui.base.model.Claim;
 import com.br.reclameaqui.claim.web.consult.service.ClaimConsultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,7 +27,7 @@ public class ClaimConsultController {
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<Claim> get(@PathVariable String id) throws TreatedExcetpion {
+    public ResponseEntity<Claim> get(@PathVariable String id) {
         try {
             Claim claim = service.findById(id);
             return ResponseEntity.ok(claim);
@@ -40,9 +36,21 @@ public class ClaimConsultController {
         }
     }
 
+    @GetMapping("search")
+    public ResponseEntity<List<Claim>> search(@RequestParam(value = "search", required = false) String search,
+                                              @RequestParam(value = "company", required = false) String company,
+                                              @RequestParam(value = "city", required = false) String city,
+                                              @RequestParam(value = "street", required = false) String street,
+                                              @RequestParam(value = "uf", required = false) String uf,
+                                              @RequestParam(value = "consumer", required = false) String consumer) {
+        List<Claim> list = service.search(search).addCompany(company)
+                .addCity(city).addUf(uf).addStreet(street).addConsumer(consumer)
+                .makeSearch();
+        return ResponseEntity.ok(list);
+    }
+
     @GetMapping("uf/{uf}")
     public ResponseEntity<List<Claim>> getByUf(@PathVariable String uf) {
         return ResponseEntity.ok(service.findByUf(uf));
     }
-
 }

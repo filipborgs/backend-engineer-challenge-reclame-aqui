@@ -9,4 +9,7 @@ import java.util.List;
 public interface ClaimRepository extends MongoRepository<Claim, String> {
     @Query("{'address.uf': '?0'}")
     public List<Claim> findByUf(String uf);
+
+    @Query("{ 'consumer.name': ?0 }")
+    public List<Claim> findByIdConsumer(String id);
 }
