@@ -42,12 +42,12 @@ This endpoint are responsible for search and filter claims registered in databas
 
 #### Parameters
 
-{search} = Search by the title of claim
-{company_ name} = Filter by company name (optional)
-{uf} = Filter by UF (optional)
-{city_name} = Filter by city name (optional)
-{street_name} = Filter by street name (optional)
-{consumer_name} = Filter by consumer name (optional)
+- {search} = Search by the title of claim
+- {company_ name} = Filter by company name (optional)
+- {uf} = Filter by UF (optional)
+- {city_name} = Filter by city name (optional)
+- {street_name} = Filter by street name (optional)
+- {consumer_name} = Filter by consumer name (optional)
 
 #### Responses
 
@@ -156,7 +156,7 @@ This endpoint are responsible for return a single claim registered in database w
 
 #### Parameters
 
-{id of claim}: This endpoint recive a id of claim in path
+- {id of claim}: This endpoint recive a id of claim in path
 
 #### Responses
 
@@ -189,7 +189,7 @@ This endpoint are responsible for return an array of claims of the UF receved in
 
 #### Parameters
 
-{uf}: This endpoint recive a UF of the state in path
+- {uf}: This endpoint recive a UF of the state in path
 
 #### Responses
 
