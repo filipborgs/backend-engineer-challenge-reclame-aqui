@@ -11,6 +11,14 @@ public class Address {
     @NotNull(message = "Um estado deve ser informado")
     private String uf;
 
+    public Address() {
+    }
+
+    public Address(String city, String uf) {
+        this.city = city;
+        this.uf = uf;
+    }
+
     public String getStreet() {
         return street;
     }

@@ -9,6 +9,13 @@ public class Consumer {
     @Email(message = "Email inválido")
     private String email;
 
+    public Consumer() {
+    }
+
+    public Consumer(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
