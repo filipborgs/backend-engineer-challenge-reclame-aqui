@@ -8,7 +8,7 @@ import com.br.reclameaqui.base.repository.ClaimRepository;
 import com.br.reclameaqui.claim.web.register.service.ClaimRegisterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebMvcTest(ClaimRegisterController.class)
-public class ClaimRegisterControllerTest {
+class ClaimRegisterControllerTest {
 
     @Autowired
     private ClaimRegisterController controller;
@@ -34,11 +34,11 @@ public class ClaimRegisterControllerTest {
 
     @BeforeEach
     public void setup() {
-        RestAssuredMockMvc.standaloneSetup(this.controller);
+        standaloneSetup(this.controller);
     }
 
     @Test
-    public void mustReturnId_whenCreateAClaim() {
+    void mustReturnId_whenCreateAClaim() {
         Claim claim = new Claim();
         claim.setTitle("Created Claim'");
         claim.setDescription("Claim description");
@@ -48,24 +48,24 @@ public class ClaimRegisterControllerTest {
         claim.setId("validId");
         Mockito.when(this.service.store(Mockito.any(Claim.class))).thenReturn(claim);
 
-        RestAssuredMockMvc.given().contentType(ContentType.JSON).body(this.asJsonString(claim)).accept(ContentType.JSON).when()
+        given().contentType(ContentType.JSON).body(asJsonString(claim)).accept(ContentType.JSON).when()
                 .post("/register/claims", claim).then().statusCode(HttpStatus.CREATED.value());
     }
 
     @Test
-    public void mustReturnError_whenSendInvalidClaim() {
+    void mustReturnError_whenSendInvalidClaim() {
         Claim claim = new Claim();
         Mockito.when(this.service.store(Mockito.any(Claim.class))).thenReturn(claim);
 
         //sending invalid empty claim
-        RestAssuredMockMvc.given().contentType(ContentType.JSON).body(this.asJsonString(claim)).accept(ContentType.JSON).when()
+        given().contentType(ContentType.JSON).body(asJsonString(claim)).accept(ContentType.JSON).when()
                 .post("/register/claims", claim).then().statusCode(HttpStatus.BAD_REQUEST.value());
 
         Mockito.verify(this.service, Mockito.never()).store(Mockito.any(Claim.class));
     }
 
     @Test
-    public void mustReturnArrayOfIds_whenCreateManyClaims() {
+    void mustReturnArrayOfIds_whenCreateManyClaims() {
         Claim claim = new Claim();
         claim.setTitle("Created Claim'");
         claim.setDescription("Claim description");
@@ -87,16 +87,16 @@ public class ClaimRegisterControllerTest {
 
         Mockito.when(this.service.storeMany(Mockito.any(List.class))).thenReturn(list);
 
-        RestAssuredMockMvc.given().contentType(ContentType.JSON).body(this.asJsonString(list)).accept(ContentType.JSON).when()
+        given().contentType(ContentType.JSON).body(asJsonString(list)).accept(ContentType.JSON).when()
                 .post("/register/claims/many", claim).then().statusCode(HttpStatus.CREATED.value());
     }
 
     @Test
-    public void mustReturnError_whenSendEmptyListOfClaims() {
+    void mustReturnError_whenSendEmptyListOfClaims() {
         Mockito.when(this.service.store(null)).thenReturn(null);
 
         //sending invalid empty claim
-        RestAssuredMockMvc.given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
                 .post("/register/claims").then().statusCode(HttpStatus.BAD_REQUEST.value());
 
         Mockito.verify(this.service, Mockito.never()).store(null);
