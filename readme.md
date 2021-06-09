@@ -8,18 +8,92 @@ Java / Spring / MongoDB
 
 This API required Java 11 and Maven to compile the project
 
-//install maven if needed
-pacman -S maven //Arch based distros
-apt install maven //Debian based distros
+// Download and install
+ - git clone https://github.com/filipborgs/backend-engineer-challenge-reclame-aqui.git
+ - cd backend-engineer-challenge-reclame-aqui
+ - mvn install
 
-git clone https://github.com/filipborgs/backend-engineer-challenge-reclame-aqui.git
-cd backend-engineer-challenge-reclame-aqui
-mvn install
-docker-compose up
+// If you dont have mongodb use this comand
+ - docker-compose up //(in root project folder)
+
+// Start discover
+ - cd gateway/target/           //(in root project folder)
+ - java -jar discover-0.0.1-SNAPSHOT.jar 
+
+// Start services
+ - cd claim-web-register/target/            //(in root project folder)
+ - java -jar claim-web-register-0.0.1-SNAPSHOT.jar 
+ - cd claim-web-consult/target/             //(in root project folder)
+ - java -jar claim-web-consult-0.0.1-SNAPSHOT.jar 
+
+// Start gateway
+ - cd gateway/target/
+ - java -jar gateway-0.0.1-SNAPSHOT.jar 
+
+The default gateway port is **8989**
 
 ## Endpoints
 
 This API is divided into microservices to consult and create new registres. A gateway connects these services.
+
+#### GET /consult/claims/search?search={search}&company={company name}&uf={uf}&city={city_name}&street={street_name}&consumer={consumer_name}
+
+This endpoint are responsible for search and filter claims registered in database.
+
+#### Parameters
+
+{search} = Search by the title of claim
+{company_ name} = Filter by company name (optional)
+{uf} = Filter by UF (optional)
+{city_name} = Filter by city name (optional)
+{street_name} = Filter by street name (optional)
+{consumer_name} = Filter by consumer name (optional)
+
+#### Responses
+
+```
+[
+    {
+        "id": "60bf839d5afe7a1eb32cf5ea",
+        "title": "Computador quebrado",
+        "createdAt": "2021-06-08T14:50:05.401+00:00",
+        "description": "Celular não funciona",
+        "address": {
+            "street": "Av froes da mota",
+            "city": "Feira de santana",
+            "cep": "44021-222",
+            "uf": "BA"
+        },
+        "consumer": {
+            "name": "zxczxc",
+            "email": "teste@gmail.com"
+        },
+        "company": {
+            "name": "teste",
+        }
+    },
+    {
+        "id": "60bf84025afe7a1eb32cf5eb",
+        "title": "Computador não funciona",
+        "createdAt": "2021-06-08T14:51:46.030+00:00",
+        "description": "Comprei um computador e ele veio quebrado",
+        "address": {
+            "street": "Gabriela II",
+            "city": "Feira de santana",
+            "cep": "44028-222",
+            "uf": "BA"
+        },
+        "consumer": {
+            "name": "Filipe Borges",
+            "email": "filipe@gmail.com"
+        },
+        "company": {
+            "name": "Dell",
+            "category": null
+        }
+    }
+]
+```
 
 #### GET /consult/claims/all
 

@@ -1,0 +1,36 @@
+version: "3"
+services: 
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+
+# networks:
+#   modules-challenge:
+#     driver: bridge
+
+# services:
+#   challengateway:
+#     build: ./gateway
+#     restart: on-failure
+#     container_name: gateway-challenge
+#     ports:
+#       - "8080:8989"
+#     depends_on:
+#       - consult
+#       - discovery
+
+#   discovery:
+#     restart: on-failure
+#     build: ./discover
+#     container_name: discovery-challenge
+#     ports:
+#     - "8761:8761"
+
+#   consult:
+#     build: ./claim-web-consult
+#     container_name: claim-consult-challenge
+#     depends_on:
+#       - discovery
+#     ports:
+#     - "8082:8082"
