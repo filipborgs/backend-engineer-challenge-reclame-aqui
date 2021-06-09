@@ -27,7 +27,7 @@ This API required Java 11 and Maven to compile the project
  - java -jar claim-web-consult-0.0.1-SNAPSHOT.jar 
 
 // Start gateway
- - cd gateway/target/
+ - cd gateway/target/ //(in root project folder)
  - java -jar gateway-0.0.1-SNAPSHOT.jar 
 
 The default gateway port is **8989**
